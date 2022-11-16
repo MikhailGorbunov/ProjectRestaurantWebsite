@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"> -->
+    
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css' )}}">
+    <title>HIDE</title>
+</head>
+
+<body>
+    <header class="inner-header">
+        <!-- <h1>HIDE</h1> -->
+        <div>
+            <a href="https://goo.gl/maps/N1zp7Us9b47EBvLB8">85 PICCADILLY LONDON W1J 7NB</a>
+        </div>
+        <div>
+            <a href="/HIDE"> <img src="img/HIDE.png" alt="logo"></a>
+        </div>
+        <div>     
+            <a href="tel:078 9455 9624">T: 012 3456 7890</a>
+            <a href="/HIDE/reservation">RESERVATIONS</a>
+                
+            
+        </div>
+    </header>
+    <main>
+        <section>
+            {% block content %}
+            {% endblock %}
+        </section>
+    </main>
+    <footer>
+        <p><a href="/HIDE"> Home </a></p>
+        <p><a href="https://www.instagram.com/hide_restaurant/"> Instagram </a></p>
+        <p><a href="/HIDE/team"> Team </a></p> 
+        <p><a href="/HIDE/careers"> Career </a></p> 
+        <p><a href="/HIDE/policy"> Reservation Policy </a></p> 
+    </footer>
+</body>
+
+</html>
+
