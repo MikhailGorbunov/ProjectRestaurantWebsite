@@ -1,15 +1,11 @@
 from db.run_sql import run_sql
 from models.table import Table
-from models.customer import Customer
-from models.waiter import Waiter
 
-import repositories.customer_repository as customer_repository
-import repositories.waiter_repository as waiter_repository
 
 def save(table):
-    sql = "INSERT INTO tables (capacity, time_slot, customer_id, waiter_id) VALUES (%s,%s,%s,%s) RETURNING *"
+    sql = "INSERT INTO tables (capacity) VALUES (%s) RETURNING *"
 
-    values = [table.capacity,table.time_slot, table.customer_id.id, table.waiter_id.id]
+    values = [table.capacity]
     results = run_sql(sql, values)
     id = results[0]['id']
     table.id = id 
@@ -21,9 +17,8 @@ def select_all():
     results = run_sql(sql)
 
     for result in results:
-        customer = customer_repository.select(result['customer_id'])
-        waiter = waiter_repository.select(result['waiter_id'])
-        table = Table(result['capacity'], result["time_slot"], customer, waiter, result['id'])
+
+        table = Table(result['capacity'], result['id'])
         tables.append(table)
     return tables
     
@@ -34,9 +29,8 @@ def select(id):
 # checking if the list returned by `run_sql(sql, values)` is empty. Empty lists are 'fasly' 
     if results:
         result = results[0]
-        customer = customer_repository.select(result['customer_id'])
-        waiter = waiter_repository.select(result['waiter_id'])
-        table = Table(result['capacity'],result["time_slot"], customer, waiter, result['id'])
+ 
+        table = Table(result['capacity'],result['id'])
     return table
 
 def delete_all():
@@ -49,9 +43,11 @@ def delete(id):
     run_sql(sql, values)
 
 def update(table):
-    sql = "UPDATE tables SET (capacity, time_slot,customer_id, waiter_id) = (%s,%s,%s,%s) WHERE id=%s"
-    values = [table.capacity, table.time_slot, table.customer_id.id, table.waiter_id.id, table.id]
+    sql = "UPDATE tables SET capacity = %s WHERE id=%s"
+    values = [table.capacity, table.id]
     run_sql(sql, values)
 
 #  not sure whether i need to add many to many but i want to select a table and see both customer and waiter assigned to it 
+
+
 

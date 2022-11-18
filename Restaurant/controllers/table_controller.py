@@ -36,16 +36,16 @@ def create_table():
 
 # EDIT
 
-@tables_blueprint.route("/HIDE/admin/tables/<id>/edit")
-def edit_table(id):
-    table = table_repository.select(id)
+@tables_blueprint.route("/HIDE/reservation")
+def edit_table():
+    table = table_repository.select_all()
     waiters = waiter_repository.select_all()
     customers = customer_repository.select_all()
     return render_template('admin/tables/edit.html', table=table, customers=customers, waiters=waiters)
 
 # UPDATE 
 
-@tables_blueprint.route("/HIDE/admin/tables/<id>", methods=['POST'])
+@tables_blueprint.route("/HIDE/restaurants/<id>", methods=['POST'])
 def update_table(id):
     capacity = request["capacity"]
     time_slot = request["time_slot"]                                                 # time might be wrong 
@@ -53,7 +53,7 @@ def update_table(id):
     waiter_id = request["waiter_id"]
     new_table = Table(capacity, time_slot, customer_id, waiter_id, id)
     table_repository.save(new_table)
-    return redirect("/HIDE/admin/tables")
+    return redirect("/HIDE")
 
 # DELETE
 

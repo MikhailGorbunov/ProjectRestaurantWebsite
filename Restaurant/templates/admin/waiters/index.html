@@ -1,0 +1,46 @@
+<link rel="stylesheet" href="{{url_for('static', filename='style.css' )}}">
+{% extends "base.html" %}
+{% block content %}
+<body class="body" >
+<h2>TEAM</h2>
+
+<p>We are a team of perfectionists, incredibly passionate and professional about what we do. 
+<p>We set out to create a truly enjoyable dining experience like no other and are looking forward </p>
+<p>to welcoming you to HIDE. </p>
+
+<div class="book-container">
+
+    <form class="book" action="/HIDE/admin/waiters" method="post">
+        <label for="f_name">Name:</label> 
+        <input type="f_name" name="f_name" id="f_name">
+
+        <label for="l_name">Surname:</label> 
+        <input type="l_name" name="l_name" id="l_name">
+
+    
+        <label for="capacity">Number:</label>
+        <input type="capacity" name="capacity" id="capacity" min="1" max="5">
+    
+        <input type="submit" value="New member" >
+      </form> <!-- ADDED -->
+    
+    {% for waiter in waiters %}
+    <div class="book">
+
+    <section>
+        <h3>{{ waiter.f_name }} {{ waiter.l_name }}</h3>
+        <p>{{ waiter.table_capacity}}</p>
+        <a href="/HIDE/admin/waiters/<id>/edit">Edit</a>
+        <form action="/HIDE/admin/waiters/delete" method="POST">
+            <input type="submit" value="Delete">
+        </form>
+
+
+    </div>
+    </section>
+    </body>
+    {% endfor %}
+
+
+</div>
+{% endblock %}

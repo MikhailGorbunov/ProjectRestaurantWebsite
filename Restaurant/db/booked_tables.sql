@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS tables;
 DROP TABLE IF EXISTS waters;
+DROP TABLE IF EXISTS bookings;
 -- DROP TABLE IF EXISTS services;
 
 
@@ -9,9 +10,7 @@ CREATE TABLE customers (
     first_name VARCHAR(255),
     last_name VARCHAR(255),
     email VARCHAR(255),
-    number INT,
-    -- time_slot TIME
-   
+    phone_number VARCHAR       -- problem with phone number with both data types: INT and VARCHAR(255)
 
 );
 
@@ -19,26 +18,29 @@ CREATE TABLE waiters (
     id SERIAL PRIMARY KEY,
     f_name VARCHAR(255),
     l_name VARCHAR(255),
-    table_capacity INT
-    -- customer_id INT REFERENCES customers(id)   
-    -- table_id INT REFERENCES table(id) -- is it many to many
+    capacity VARCHAR(255)
 
 );
 
 CREATE TABLE tables (
     id SERIAL PRIMARY KEY,
-    capacity INT,
-    time_slot TIME,
-    customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
-    waiter_id INT REFERENCES waiters(id) ON DELETE CASCADE
---  maybe time slot needs to be added 
+    capacity INT
+    
 );
 
--- CREATE TABLE services (
---     id SERIAL PRIMARY KEY, 
---     time_slot SMALLDATETIME,
---     customer_id INT REFERENCES customers(id),    
---     waiter_id INT REFERENCES waiters(id)
-    
+CREATE TABLE bookings (
+    id SERIAL PRIMARY KEY,
+    capacity INT,
+    day_time TIME,
+    time TIME,
+    booked BOOLEAN, 
+    table_id INT REFERENCES tables(id) ON DELETE CASCADE,
+    customer_id INT REFERENCES customers(id) ON DELETE CASCADE,
+    waiter_id INT REFERENCES waiters(id) ON DELETE CASCADE
 
--- );
+);
+
+
+-- ALTER TABLE bookings
+-- ALTER COLUMN booked
+-- SET DEFAULT FALSE

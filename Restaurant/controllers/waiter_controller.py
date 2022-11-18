@@ -6,16 +6,17 @@ import repositories.waiter_repository as waiter_repository
 waiters_blueprint = Blueprint("waiters", __name__)             # blueprint's name can be different     
 # INDEX 
 
-@waiters_blueprint.route("/HIDE/admin/waiters")
+@waiters_blueprint.route("/HIDE/team")
 def waiters():
     waiters = waiter_repository.select_all()
     return render_template("admin/waiters/index.html", waiters=waiters)
 
 # NEW
 
-@waiters_blueprint.route("/HIDE/admin/waiter-new")
+@waiters_blueprint.route("/HIDE/admin/new")
 def new_waiter():
-    return render_template("admin/waiters/waiter-new.html")
+    waiters = waiter_repository.select_all()
+    return render_template("admin/waiters/new.html", waiters=waiters)
 
 # CREATE
 
@@ -28,12 +29,12 @@ def create_waiter():
     # mimetype = pic.mimetype
 
 
-    f_name = request.form["name"]
-    l_name = request.form["surname"]
-    table_capacity = request["table_capacity"]
-    new_waiter = Waiter(pic, f_name, l_name, table_capacity)
+    f_name = request.form["f_name"]
+    l_name = request.form["l_name"]
+    capacity = request.form["capacity"]
+    new_waiter = Waiter(f_name, l_name, capacity)
     waiter_repository.save(new_waiter)
-    return redirect("/HIDE/admin/waiters")
+    return redirect("/HIDE/team")
 
 # EDIT
 
@@ -46,17 +47,17 @@ def edit_waiter(id):
 
 @waiters_blueprint.route("/HIDE/admin/waiters/<id>", methods=['POST'])
 def update_waiter(id):
-    pic = pic.form["avatar"]
-    f_name = request.form["name"]
-    l_name = request.form["surname"]
-    table_capacity = request["table_capacity"]
-    new_waiter = Waiter(pic, f_name, l_name, table_capacity, id)
+    # pic = pic.form["avatar"]
+    f_name = request.form["f_name"]
+    l_name = request.form["l_name"]
+    capacity = request.form["capacity"]
+    new_waiter = Waiter(f_name, l_name, table, id)
     waiter_repository.save(new_waiter)
-    return redirect("/HIDE/admin/waiters")
+    return redirect("/HIDE/team")
 
 # DELETE
 
 @waiters_blueprint.route("/HIDE/admin/waiters/delete", methods=["POST"])
 def delete_waiter(id):
     waiter_repository.delete(id)
-    return redirect("/HIDE/admin/waiters")
+    return redirect("/HIDE/team")

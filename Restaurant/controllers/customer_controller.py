@@ -12,9 +12,9 @@ def customers():
 
 # NEW
 
-@customers_blueprint.route("/HIDE/reservation")
-def new_customer():
-    return render_template("admin/customers/customer-new.html")
+# @customers_blueprint.route("/HIDE/reservation")
+# def new_customer():
+#     return render_template("admin/customers/customer-new.html")
 
 # CREATE
 
@@ -23,28 +23,28 @@ def create_customer():
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
     email = request.form["email"]
-    number = request["number"]
-    new_customer = Customer(first_name, last_name, email, number)
+
+    phone_number = request["phone_number"]
+    new_customer = Customer(first_name, last_name, email, phone_number, id)
     customer_repository.save(new_customer)
     return redirect("/HIDE")
 
 # EDIT
 
-@customers_blueprint.route("/HIDE/admin/customers/edit")
-def edit_customer(id):
-    customer = customer_repository.select(id)
+@customers_blueprint.route("/HIDE/reservation")
+def edit_customer():
+    customer = customer_repository.select_all()
     return render_template('admin/customers/edit.html', customer=customer)
 
 # UPDATE 
 
-@customers_blueprint.route("/HIDE/admin/customers/<id>", methods=['POST'])
+@customers_blueprint.route("/HIDE/reservation/<id>", methods=['POST'])
 def update_customer(id):
     first_name = request.form["first_name"]
     last_name = request.form["last_name"]
     email = request.form["email"]
-    number = request["number"]
-
-    new_customer = Customer(first_name, last_name, email, number, id)
+    phone_number = request["phone_number"]
+    new_customer = Customer(first_name, last_name, email, phone_number, id)
     customer_repository.save(new_customer)
     return redirect("/HIDE")
 

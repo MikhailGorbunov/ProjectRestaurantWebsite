@@ -3,8 +3,8 @@ from models.waiter import Waiter
 import repositories.customer_repository as customer_repository
 
 def save(waiter):
-    sql = "INSERT INTO waiters (f_name, l_name, table_capacity) VALUES (%s,%s,%s) RETURNING *"
-    values = [waiter.f_name, waiter.l_name, waiter.table_capacity]
+    sql = "INSERT INTO waiters (f_name, l_name, capacity) VALUES (%s,%s,%s) RETURNING *"
+    values = [waiter.f_name, waiter.l_name, waiter.capacity]
     results = run_sql(sql, values)
     id = results[0]['id']
     waiter.id = id
@@ -16,7 +16,7 @@ def select_all():
     results = run_sql(sql)
     for result in results:
         # customer = waiter_repository.select(result['customer_id'])
-        waiter = Waiter(result['f_name'], result['l_name'], result['table_capacity'], result['id'])
+        waiter = Waiter(result['f_name'], result['l_name'], result['capacity'], result['id'])
         waiters.append(waiter)
     return waiters
 
@@ -30,7 +30,7 @@ def select(waiter):
     if results:
         result = results[0]
         # customer = waiter_repository.select(result['customer_id'])
-        waiter = Waiter(result['f_name'], result['l_name'], result['table_capacity'], result['id'])
+        waiter = Waiter(result['f_name'], result['l_name'], result['capacity'], result['id'])
     return waiter
 
 def delete_all():
@@ -43,7 +43,7 @@ def delete(id):
     run_sql(sql, values)
 
 def update(waiter):
-    sql = "UPDATE waiters SET (f_name, l_name, table_capacity, customer_id) = (%s,%s,%s) WHERE id = %s"
+    sql = "UPDATE waiters SET (f_name, l_name, capacity) = (%s,%s,%s) WHERE id = %s"
     values = [waiter.f_name, waiter.l_name, waiter.capacity, waiter.id]
     run_sql(sql, values)
 
