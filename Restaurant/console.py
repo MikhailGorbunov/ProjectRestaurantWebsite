@@ -4,13 +4,13 @@ import pdb
 #  Import models/classes 
 from models.customer import Customer
 from models.table import Table
-from models.waiter import Waiter
+from models.stuff import Stuff
 from models.booking import Booking
 
 #  Import repositories 
 import repositories.customer_repository as customer_repository
 import repositories.table_repository as table_repository
-import repositories.waiter_repository as waiter_repository
+import repositories.stuff_repository as stuff_repository
 import repositories.booking_repository as booking_repository
 
 # Functions that are linked to repositories
@@ -19,14 +19,14 @@ import repositories.booking_repository as booking_repository
 #____Delete_all functions to clean the table instead of stacking data 
 customer_repository.delete_all()
 table_repository.delete_all()
-waiter_repository.delete_all()
+stuff_repository.delete_all()
 booking_repository.delete_all()
 
 #____Save date to db table / sql
 #  DATE format YYYY-MM-DD hh:mm:ss
 # ___________Customer______________
-customer1 = Customer("Jakub", "Cahil", "jakub@gmail.com", "+078948596") 
-customer2 = Customer("Nicolas", "Bassett"," nicolas@gmail.com", "+44012345") 
+customer1 = Customer("Jakub", "Cahil", "jakub@gmail.com", "+447894559624") 
+customer2 = Customer("Nicolas", "Bassett"," nicolas@gmail.com", "+79091281408") 
 customer3 = Customer("Kenneth", "Mckinney", "kenneth.gmail.com", "+44012345") 
 customer4 = Customer("Tobias", "Moyer", "tobias@gmail", "123456") 
 customer5 = Customer("Alexandre", "Ryan","alexndre@gmail", "123456") 
@@ -85,17 +85,17 @@ customer_repository.save(customer8)
 # customer_repository.save(customer26)
 
 
-# ___________Waiter______________
+# ___________stuff______________
 
 # Deacon Parker
 # Annabell Mackie
 
-waiter1 = Waiter("Lucie", "White", 2)
-waiter2 = Waiter("Elana", "Whitfield", 2)
-# waiter1 = Waiter("Deacon", "Parker", 2, )
+stuff1 = Stuff("Lucie", "White", 2, "Waiter")
+stuff2 = Stuff("Elana", "Whitfield", 2, "Waiter")
+# stuff1 = stuff("Deacon", "Parker", 2, )
 
-waiter_repository.save(waiter1)
-waiter_repository.save(waiter2)
+stuff_repository.save(stuff1)
+stuff_repository.save(stuff2)
 
 
 #___________Table_______________
@@ -179,15 +179,15 @@ table_repository.save(table3)
 # _________Bookings 
 
 
-booking1_12_00 = Booking(2, '2022-12-01', "12:00", True, table1, customer1,waiter1 )
-booking2_12_00 = Booking(4, '2022-12-01', "12:00", True, table2, customer2,waiter2 )
-booking1_12_30 = Booking(2, '2022-12-01', "12:30", True, table1,customer3,waiter1 )
-booking2_12_30 = Booking(4, '2022-12-01', "12:30", True, table2, customer4,waiter2 )
+booking1_12_00 = Booking(2, "2022-12-01 12:00:00", True, table1, customer1, stuff1 )
+booking2_12_00 = Booking(4, "2022-12-01 12:00:00", True, table2, customer2, stuff2 )
+booking1_12_30 = Booking(2, "2022-12-01 12:30:00", True, table1, customer3, stuff1 )
+booking2_12_30 = Booking(4, "2022-12-01 12:30:00", True, table2, customer4, stuff2 )
 
-booking1_13_00 = Booking(4, '2022-12-01', "13:00", True, table3, customer5,waiter1 )
-booking2_13_00 = Booking(3, '2022-12-01', "13:00", True, table1, customer6,waiter2 )
-booking1_15_30 = Booking(4, '2022-12-01', "15:30", True, table2, customer7,waiter1 )
-booking2_13_30 = Booking(4, '2022-12-01', "13:30:", True, table1, customer8,waiter2 )
+booking1_13_00 = Booking(4, "2022-12-01 13:00:00", True, table3, customer5, stuff1 )
+booking2_13_00 = Booking(3, "2022-12-01 13:00:00", True, table1, customer6, stuff2 )
+booking1_15_30 = Booking(4, "2022-12-01 15:30:00", True, table2, customer7, stuff1 )
+booking2_13_30 = Booking(4, "2022-12-01 13:30:00", True, table1, customer8, stuff2 )
 
 
 

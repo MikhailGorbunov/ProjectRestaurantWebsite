@@ -3,9 +3,9 @@ from models.table import Table
 
 
 def save(table):
-    sql = "INSERT INTO tables (capacity) VALUES (%s) RETURNING *"
+    sql = "INSERT INTO tables (table_capacity) VALUES (%s) RETURNING *"
 
-    values = [table.capacity]
+    values = [table.table_capacity]
     results = run_sql(sql, values)
     id = results[0]['id']
     table.id = id 
@@ -18,7 +18,7 @@ def select_all():
 
     for result in results:
 
-        table = Table(result['capacity'], result['id'])
+        table = Table(result['table_capacity'], result['id'])
         tables.append(table)
     return tables
     
@@ -30,7 +30,7 @@ def select(id):
     if results:
         result = results[0]
  
-        table = Table(result['capacity'],result['id'])
+        table = Table(result['table_capacity'],result['id'])
     return table
 
 def delete_all():
@@ -44,7 +44,7 @@ def delete(id):
 
 def update(table):
     sql = "UPDATE tables SET capacity = %s WHERE id=%s"
-    values = [table.capacity, table.id]
+    values = [table.table_capacity, table.id]
     run_sql(sql, values)
 
 #  not sure whether i need to add many to many but i want to select a table and see both customer and waiter assigned to it 

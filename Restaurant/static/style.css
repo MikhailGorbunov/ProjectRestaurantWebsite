@@ -238,14 +238,18 @@ footer > p >a{
 .book-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: row;
+  align-items: center;
+    
   /* justify-content: space-between; */
   /* justify-content: space-around; */
-  align-content: flex-start;
+  /* align-content: flex-start; */
 }
 
 .book input{
-  margin: 5px 90px;
-
+  text-align: center;
+  margin: 1% 38%;
+  align-items: center;
   padding: 10px 20px;
   /* background-color: greenyellow; */
 }

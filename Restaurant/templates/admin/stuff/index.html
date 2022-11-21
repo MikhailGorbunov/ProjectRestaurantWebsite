@@ -10,28 +10,32 @@
 
 <div class="book-container">
 
-    <form class="book" action="/HIDE/admin/waiters" method="post">
+    <form class="book" action="/HIDE/admin/stuff/<id>" method="post">
         <label for="f_name">Name:</label> 
         <input type="f_name" name="f_name" id="f_name">
 
         <label for="l_name">Surname:</label> 
         <input type="l_name" name="l_name" id="l_name">
 
+        <label for="role">Role:</label> 
+        <input type="role" name="role" id="role">
+
+        <label for="table_capacity">Number:</label>
+        <input type="number" name="table_capacity" id="table_capacity" min="1" max="5">
+
     
-        <label for="capacity">Number:</label>
-        <input type="capacity" name="capacity" id="capacity" min="1" max="5">
-    
-        <input type="submit" value="New member" >
+        <input type="submit" value="New" >
       </form> <!-- ADDED -->
     
-    {% for waiter in waiters %}
+    {% for stuff in stuff %}
     <div class="book">
 
     <section>
-        <h3>{{ waiter.f_name }} {{ waiter.l_name }}</h3>
-        <p>{{ waiter.table_capacity}}</p>
-        <a href="/HIDE/admin/waiters/<id>/edit">Edit</a>
-        <form action="/HIDE/admin/waiters/delete" method="POST">
+        <h3>{{ stuff.f_name }} {{ stuff.l_name }}</h3>
+        <p>Table capacity: {{ stuff.table_capacity}}</p>
+        <p>Role: {{ stuff.role}}</p>
+        <a href="/HIDE/admin/stuff/<id>/edit">Edit</a>
+        <form action="/HIDE/admin/stuff/delete" method="POST">
             <input type="submit" value="Delete">
         </form>
 
@@ -44,3 +48,4 @@
 
 </div>
 {% endblock %}
+
